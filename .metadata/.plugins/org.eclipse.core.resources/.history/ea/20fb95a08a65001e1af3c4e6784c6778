@@ -1,0 +1,7 @@
+package com.credibanco.bankinc.dao;
+
+import org.springframework.data.repository.CrudRepository;
+
+public interface TarjetaDAO extends CrudRepository<T, ID> {
+
+}

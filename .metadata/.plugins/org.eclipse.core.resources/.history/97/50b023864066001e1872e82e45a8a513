@@ -1,0 +1,42 @@
+package com.credibanco.bankinc.web;
+
+
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+
+@RestController
+@RequestMapping("card")
+public class BankincCardController {
+	
+	
+	@GetMapping("/{productId}/number")
+	public String generarNumeroTarjeta(){
+		
+    return null;		
+	}
+	
+	
+	@PostMapping("/enroll")
+	public void activarTarjeta(){		
+		
+	}
+	
+	@DeleteMapping(value="/{cardId}")
+	public void delete
+	{
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+
+}

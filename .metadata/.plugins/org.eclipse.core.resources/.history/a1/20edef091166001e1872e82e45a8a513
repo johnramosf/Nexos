@@ -1,0 +1,32 @@
+package com.credibanco.bankinc.web;
+
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+
+@RestController
+public class BankincController {
+	
+	
+	@GetMapping("/card/{productId}/number")
+	public String generarNumeroTarjeta(){
+		
+    return null;		
+	}
+	
+	
+	@PostMapping("/card/enroll")
+	public void activarTarjeta(){
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+
+}

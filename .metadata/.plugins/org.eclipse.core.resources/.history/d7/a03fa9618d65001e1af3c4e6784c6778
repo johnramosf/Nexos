@@ -1,0 +1,13 @@
+package com.credibanco.bankinc.service;
+
+public interface TransaccionService {
+	
+	    public List<Transaccion> listarPersonas();
+	    
+	    public void guardar(Transaccion transaccion);
+	    
+	    public void eliminar(Transaccion transaccion);
+	    
+	    public Transaccion encontrarTransaccion(Transaccion transaccion);
+
+}

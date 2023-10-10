@@ -1,0 +1,10 @@
+package com.credibanco.bankinc.model;
+
+@Entity
+public class Transaccion {
+	
+	
+	
+	
+
+}

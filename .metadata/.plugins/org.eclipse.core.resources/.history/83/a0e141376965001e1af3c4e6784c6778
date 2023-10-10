@@ -1,0 +1,5 @@
+package com.credibanco.bankinc.model;
+
+public class Cliente {
+
+}

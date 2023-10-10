@@ -1,0 +1,5 @@
+package com.credibanco.bankinc.service;
+
+public interface TarjetaService {
+
+}

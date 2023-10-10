@@ -1,0 +1,5 @@
+package com.credibanco.bankinc.web;
+
+public class BankincTransController {
+
+}

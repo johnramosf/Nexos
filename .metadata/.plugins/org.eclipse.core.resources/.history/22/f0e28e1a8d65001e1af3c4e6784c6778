@@ -1,0 +1,15 @@
+package com.credibanco.bankinc.service;
+
+import com.credibanco.bankinc.model.Tarjeta;
+
+public interface TarjetaService {
+	
+	    public List<Tarjeta> listarPersonas();
+	    
+	    public void guardar(Tarjeta tarjeta);
+	    
+	    public void eliminar(Tarjeta tarjeta);
+	    
+	    public Tarjeta encontrarPersona(Tarjeta tarjeta);
+
+}
