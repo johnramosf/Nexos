@@ -1,6 +1,7 @@
 package com.credibanco.bankinc.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -36,9 +37,11 @@ public class TransaccionServiceImpl implements TransaccionService {
 	}
 
 	@Override
-	public Transaccion encontrarTransaccion(Transaccion transaccion) {
+	public Transaccion encontrarTransaccion(Long idTransaccion) {
 		
-		return transaccionDao.findById(transaccion.getId()).orElse(null);
+		Optional<Transaccion> optTran = transaccionDao.findById(idTransaccion);
+		return optTran.get();
+		
 	}
 	
 

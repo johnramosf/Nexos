@@ -12,6 +12,6 @@ public interface TransaccionService {
 	    
 	    public void eliminar(Transaccion transaccion);
 	    
-	    public Transaccion encontrarTransaccion(Transaccion transaccion);
+	    public Transaccion encontrarTransaccion(Long idTransaccion);
 
 }

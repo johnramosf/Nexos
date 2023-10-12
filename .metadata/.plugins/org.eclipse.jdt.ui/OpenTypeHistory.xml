@@ -1,6 +1,2 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<typeInfoHistroy>
-    <typeInfo handle="=BankInc/C:\/Users\/user\/.m2\/repository\/org\/springframework\/data\/spring-data-commons\/3.1.4\/spring-data-commons-3.1.4.jar=/maven.pomderived=/true=/=/maven.groupId=/org.springframework.data=/=/maven.artifactId=/spring-data-commons=/=/maven.version=/3.1.4=/=/maven.scope=/compile=/=/maven.pomderived=/true=/&lt;org.springframework.data.repository(CrudRepository.class[CrudRepository" modifiers="1537" timestamp="1696703161232"/>
-    <typeInfo handle="=BankInc/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.credibanco.bankinc.service{TarjetaService.java[TarjetaService" modifiers="513" timestamp="1696788470356"/>
-    <typeInfo handle="=BankInc/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.credibanco.bankinc.service{TransaccionService.java[TransaccionService" modifiers="513" timestamp="1696789155546"/>
-</typeInfoHistroy>
+<typeInfoHistroy/>
