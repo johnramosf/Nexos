@@ -17,6 +17,10 @@ public class Cliente {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
 	private Long idCliente;
 	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "cliente", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+	private List<Tarjeta> tarjetas;
+
+	
 	private String primerNombre;
 	
 	private String segundoNombre;
@@ -24,22 +28,30 @@ public class Cliente {
 	private String primerApellido;
 	
 	private String segundoApellido;
-	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "cliente", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
-	private List<Tarjeta> tarjetas;
-	
-	
+			
 	public Cliente() {
 	}
 	
 	
 
 	public Cliente(String primerNombre, String segundoNombre, String primerApellido, String segundoApellido) {
-		super();
 		this.primerNombre = primerNombre;
 		this.segundoNombre = segundoNombre;
 		this.primerApellido = primerApellido;
 		this.segundoApellido = segundoApellido;
+	}
+
+
+	
+
+	public List<Tarjeta> getTarjetas() {
+		return tarjetas;
+	}
+
+
+
+	public void setTarjetas(List<Tarjeta> tarjetas) {
+		this.tarjetas = tarjetas;
 	}
 
 
@@ -48,9 +60,12 @@ public class Cliente {
 		return idCliente;
 	}
 
+
+
 	public void setIdCliente(Long idCliente) {
 		this.idCliente = idCliente;
 	}
+
 
 
 	public String getPrimerNombre() {

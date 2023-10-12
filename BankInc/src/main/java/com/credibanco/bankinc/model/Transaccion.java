@@ -16,7 +16,7 @@ public class Transaccion {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private long id;
+	private Long idTransaccion;
 	
 	
 	@ManyToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
@@ -32,6 +32,9 @@ public class Transaccion {
 	private Double montoTransaccion;
 	
 	private String estadoTransaccion;
+	
+	@Column(columnDefinition = "varchar(255) default 'USD'")
+	private String tipoMoneda;
 	
 	
 	public Transaccion() {
@@ -53,13 +56,16 @@ public class Transaccion {
 
 
 
-	public long getId() {
-		return id;
+
+	public Long getIdTransaccion() {
+		return idTransaccion;
 	}
 
-	public void setId(long id) {
-		this.id = id;
+
+	public void setIdTransaccion(Long idTransaccion) {
+		this.idTransaccion = idTransaccion;
 	}
+
 
 	public Tarjeta getTarjeta() {
 		return tarjeta;
@@ -100,12 +106,22 @@ public class Transaccion {
 	public void setEstadoTransaccion(String estadoTransaccion) {
 		this.estadoTransaccion = estadoTransaccion;
 	}
+	
+
+	public String getTipoMoneda() {
+		return tipoMoneda;
+	}
+
+
+	public void setTipoMoneda(String tipoMoneda) {
+		this.tipoMoneda = tipoMoneda;
+	}
 
 
 	
 	@Override
 	public String toString() {
-		return "Transaccion [id=" + id + ", tarjeta=" + tarjeta + ", fechaTransaccion=" + fechaTransaccion
+		return "Transaccion [id=" + idTransaccion + ", tarjeta=" + tarjeta + ", fechaTransaccion=" + fechaTransaccion
 				+ ", fechaActualizacion=" + fechaActualizacion + ", montoTransaccion=" + montoTransaccion
 				+ ", estadoTransaccion=" + estadoTransaccion + "]";
 	}
