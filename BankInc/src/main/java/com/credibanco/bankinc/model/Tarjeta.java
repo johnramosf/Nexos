@@ -1,6 +1,7 @@
 package com.credibanco.bankinc.model;
 
-import java.time.LocalDateTime;
+import java.io.Serializable;
+import java.time.LocalDate;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -10,7 +11,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Query;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.Size;
@@ -18,8 +18,12 @@ import jakarta.validation.constraints.Size;
 @Entity
 @Table(uniqueConstraints = {
 		   @UniqueConstraint(name = "UniqueNumber", columnNames = {"numeroTarjeta"})})
-public class Tarjeta {
+public class Tarjeta implements Serializable  {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -33,11 +37,11 @@ public class Tarjeta {
 	@JoinColumn(name="idCliente")
     private Cliente cliente;
     
-    @Column(name = "fechaExpedicion", columnDefinition = "TIMESTAMP")
-    private LocalDateTime fechaExpedicion;
+    @Column(name = "fechaExpedicion")
+    private LocalDate fechaExpedicion;
     
-    @Column(name = "fechaVencimiento", columnDefinition = "TIMESTAMP")
-    private LocalDateTime fechaVencimiento;
+    @Column(name = "fechaVencimiento")
+    private LocalDate fechaVencimiento;
     
     private String estadoTarjeta;
     
@@ -54,7 +58,7 @@ public class Tarjeta {
     	this.numeroTarjeta =  numeroTarjeta;
     }
 	
-	public Tarjeta(Cliente cliente, LocalDateTime fechaExpedicion, LocalDateTime fechaVencimiento, String estadoTarjeta,
+	public Tarjeta(Cliente cliente, LocalDate fechaExpedicion, LocalDate fechaVencimiento, String estadoTarjeta,
 			Double saldoTarjeta) {
 		super();
 		this.cliente = cliente;
@@ -95,22 +99,22 @@ public class Tarjeta {
 	}
 
 
-	public LocalDateTime getFechaExpedicion() {
+	public LocalDate getFechaExpedicion() {
 		return fechaExpedicion;
 	}
 
 
-	public void setFechaExpedicion(LocalDateTime fechaExpedicion) {
+	public void setFechaExpedicion(LocalDate fechaExpedicion) {
 		this.fechaExpedicion = fechaExpedicion;
 	}
 
 
-	public LocalDateTime getFechaVencimiento() {
+	public LocalDate getFechaVencimiento() {
 		return fechaVencimiento;
 	}
 
 
-	public void setFechaVencimiento(LocalDateTime fechaVencimiento) {
+	public void setFechaVencimiento(LocalDate fechaVencimiento) {
 		this.fechaVencimiento = fechaVencimiento;
 	}
 
