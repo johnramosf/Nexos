@@ -14,12 +14,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.credibanco.bankinc.model.Cliente;
 import com.credibanco.bankinc.model.CodigoProducto;
 import com.credibanco.bankinc.model.Tarjeta;
 import com.credibanco.bankinc.model.exceptions.GestionTarjetaException;
 import com.credibanco.bankinc.model.exceptions.GestionTarjetaException2;
 import com.credibanco.bankinc.model.exceptions.CardGestionError;
 import com.credibanco.bankinc.service.TarjetaService;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.JsonNode;
 
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.Produces;
@@ -66,36 +69,35 @@ public class BankincCardController {
 	
 	
 	@PostMapping("/enroll")
-	public Tarjeta activarTarjeta(String cardId, String clienteId){		
-	    
-		Tarjeta generada = tarjetaService.encontrarPorNumeroTarjeta(cardId);
-		if(generada==null) {
-			throw new GestionTarjetaException2("El número de tarjeta ingresada no existe");	
-		}
+	public Tarjeta activarTarjeta(@RequestBody Tarjeta tarjeta){		
+		Tarjeta generada = null; 
+		Cliente clienteActual = null;
+		String numeroTarjeta; 
 		Long noTarjeta;
 		Long noCliente;
 		try {
-			noTarjeta = Long.parseLong(cardId);
-			noCliente = Long.parseLong(clienteId);
+			
+			numeroTarjeta = tarjeta.getNumeroTarjeta();
+			noCliente = tarjeta.getCliente().getIdCliente();
+			generada = tarjetaService.encontrarPorNumeroTarjeta(numeroTarjeta);
+			if(generada==null) {
+				throw new GestionTarjetaException2("El número de tarjeta ingresada no existe");	
+			}
+			noTarjeta = generada.getIdTarjeta();
 			
 		}catch(NumberFormatException e) {
 			throw new GestionTarjetaException("Los párametros cardId(entero 10), o clienteId(entero) no tienen el formato adecuado: ", e);
 		}
 		
-		Tarjeta tarjeta = tarjetaService.activarTarjeta(cardId, noCliente);
-		return tarjeta;
-		
+		Tarjeta aGenerar = tarjetaService.activarTarjeta(generada.getNumeroTarjeta(), noCliente);
+		return aGenerar;	
 	}
-	
-	
 	
 	@DeleteMapping (path ="/{cardId}")
 	public Response bloquearTarjeta(@RequestParam("id") String id)
 	{
 		return null;
 	}
-	
-	
 	
 	@PostMapping("/card/balance")
 	public Response recargaSaldo() {

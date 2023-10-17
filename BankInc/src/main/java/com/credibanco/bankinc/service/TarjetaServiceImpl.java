@@ -1,5 +1,6 @@
 package com.credibanco.bankinc.service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -129,17 +130,26 @@ public class TarjetaServiceImpl implements TarjetaService {
 	@Override
 	@Transactional
 	public Tarjeta activarTarjeta(String noTarjeta, Long idCliente) {
+		System.out.println("noTarjeta: "+noTarjeta);
+		System.out.println("idCliente: "+idCliente);
 		Long idCard = tarjetaDao.findTarjetaPorNumero(noTarjeta);
 		Tarjeta cardToActivate = getTarjetaPorId(idCard);
-		Optional<Cliente> actualOpt = clienteDao.findById(idCliente).or(null);
-		Cliente actual = actualOpt.get();
+		System.out.println(cardToActivate);
+		System.out.println(idCliente.longValue());
+		System.out.println("Antes del findById del cliente.");
+		Cliente actual = (clienteDao.findById(idCliente)).get();
+		System.out.println("Se quedo en  findById ");
+		System.out.println("actual:"+actual);
 		cardToActivate.setCliente(actual);
+		
 		Date hoy = new Date();
-		LocalDateTime ldt = LocalDateTime.of(hoy.getYear(),hoy.getMonth(),hoy.getHours(),hoy.getMinutes(),hoy.getSeconds());
-		LocalDateTime ldtv = ldt.plusYears(3L); 
+		LocalDate ldt = LocalDate.now();
+		LocalDate ldtv = ldt.plusYears(3L); 
 		cardToActivate.setFechaExpedicion(ldt);
 		cardToActivate.setEstadoTarjeta(EstadoTarjeta.ACTIVA.toString());
 		cardToActivate.setSaldoTarjeta(1000.0);
+		cardToActivate.setFechaVencimiento(ldtv);
+		System.out.println(cardToActivate);
 		return cardToActivate;
 	}
 	

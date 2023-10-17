@@ -1,5 +1,6 @@
 package com.credibanco.bankinc.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -9,10 +10,16 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
-public class Cliente {
+public class Cliente implements Serializable  {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
 	private Long idCliente;
@@ -106,7 +113,15 @@ public class Cliente {
 	public void setSegundoApellido(String segundoApellido) {
 		this.segundoApellido = segundoApellido;
 	}
-	
+
+
+
+	@Override
+	public String toString() {
+		return "Cliente [idCliente=" + idCliente + ", tarjetas=" + tarjetas + ", primerNombre=" + primerNombre
+				+ ", segundoNombre=" + segundoNombre + ", primerApellido=" + primerApellido + ", segundoApellido="
+				+ segundoApellido + "]";
+	}
 	
 	
 }
