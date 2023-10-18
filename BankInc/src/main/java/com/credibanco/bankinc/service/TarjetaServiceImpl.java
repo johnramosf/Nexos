@@ -44,19 +44,11 @@ public class TarjetaServiceImpl implements TarjetaService {
 	
 	
 	@Override
-	public void guardar(Tarjeta tarjeta) {
+	public Tarjeta guardar(Tarjeta tarjeta) {
 	
-		   tarjetaDao.save(tarjeta); 
+		   return tarjetaDao.save(tarjeta); 
 	}
 
-	
-	
-	@Override
-	public void eliminar(Tarjeta tarjeta) {
-		tarjetaDao.delete(tarjeta); 
-
-	}
-	
 	
 	
 	
@@ -137,21 +129,38 @@ public class TarjetaServiceImpl implements TarjetaService {
 		System.out.println(cardToActivate);
 		System.out.println(idCliente.longValue());
 		System.out.println("Antes del findById del cliente.");
-		Cliente actual = (clienteDao.findById(idCliente)).get();
-		System.out.println("Se quedo en  findById ");
-		System.out.println("actual:"+actual);
-		cardToActivate.setCliente(actual);
-		
-		Date hoy = new Date();
+		Optional<Cliente> opClienteActual = clienteDao.findById(idCliente); 
+		Cliente actual = opClienteActual.get();
+		//System.out.println("ClienteActual: "+actual);
 		LocalDate ldt = LocalDate.now();
 		LocalDate ldtv = ldt.plusYears(3L); 
 		cardToActivate.setFechaExpedicion(ldt);
 		cardToActivate.setEstadoTarjeta(EstadoTarjeta.ACTIVA.toString());
 		cardToActivate.setSaldoTarjeta(1000.0);
 		cardToActivate.setFechaVencimiento(ldtv);
+		cardToActivate.setCliente(actual);
+		tarjetaDao.save(cardToActivate);
 		System.out.println(cardToActivate);
 		return cardToActivate;
 	}
+	
+	
+	
+	@Override
+	@Transactional
+	public Tarjeta eliminar(String noTarjeta) {
+		System.out.println("noTarjeta: "+noTarjeta);
+		Long idCard = tarjetaDao.findTarjetaPorNumero(noTarjeta);
+		Tarjeta cardToBlock = getTarjetaPorId(idCard);
+		System.out.println("TarjetaAActivar: "+cardToBlock);
+		cardToBlock.setEstadoTarjeta(EstadoTarjeta.BLOQUEADA.toString());
+		System.out.println(cardToBlock);
+		cardToBlock=tarjetaDao.save(cardToBlock);
+		return cardToBlock;
+	}
+	
+	
+	
 	
 
 }

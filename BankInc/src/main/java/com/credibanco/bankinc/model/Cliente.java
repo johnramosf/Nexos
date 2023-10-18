@@ -23,11 +23,7 @@ public class Cliente implements Serializable  {
 	@Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
 	private Long idCliente;
-	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "cliente", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
-	private List<Tarjeta> tarjetas;
-
-	
+		
 	private String primerNombre;
 	
 	private String segundoNombre;
@@ -47,20 +43,6 @@ public class Cliente implements Serializable  {
 		this.primerApellido = primerApellido;
 		this.segundoApellido = segundoApellido;
 	}
-
-
-	
-
-	public List<Tarjeta> getTarjetas() {
-		return tarjetas;
-	}
-
-
-
-	public void setTarjetas(List<Tarjeta> tarjetas) {
-		this.tarjetas = tarjetas;
-	}
-
 
 
 	public Long getIdCliente() {
@@ -118,7 +100,7 @@ public class Cliente implements Serializable  {
 
 	@Override
 	public String toString() {
-		return "Cliente [idCliente=" + idCliente + ", tarjetas=" + tarjetas + ", primerNombre=" + primerNombre
+		return "Cliente [idCliente=" + idCliente + ", primerNombre=" + primerNombre
 				+ ", segundoNombre=" + segundoNombre + ", primerApellido=" + primerApellido + ", segundoApellido="
 				+ segundoApellido + "]";
 	}
