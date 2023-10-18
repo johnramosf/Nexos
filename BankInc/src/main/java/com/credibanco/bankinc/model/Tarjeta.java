@@ -34,7 +34,7 @@ public class Tarjeta implements Serializable  {
     
 
     @ManyToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
-	@JoinColumn(name="idCliente")
+	@JoinColumn(name="id_cliente")
     private Cliente cliente;
     
     @Column(name = "fechaExpedicion")

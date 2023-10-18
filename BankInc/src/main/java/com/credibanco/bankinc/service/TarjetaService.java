@@ -9,9 +9,9 @@ public interface TarjetaService {
 	
 	    public List<Tarjeta> listarTarjetas();
 	    
-	    public void guardar(Tarjeta tarjeta);
+	    public Tarjeta guardar(Tarjeta tarjeta);
 	    
-	    public void eliminar(Tarjeta tarjeta);
+	    public Tarjeta eliminar(String noTarjeta);
 	    
 	    public Tarjeta encontrarPorNumeroTarjeta(String noTarjeta);
 	    

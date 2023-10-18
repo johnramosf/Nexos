@@ -71,7 +71,6 @@ public class BankincCardController {
 	@PostMapping("/enroll")
 	public Tarjeta activarTarjeta(@RequestBody Tarjeta tarjeta){		
 		Tarjeta generada = null; 
-		Cliente clienteActual = null;
 		String numeroTarjeta; 
 		Long noTarjeta;
 		Long noCliente;
@@ -86,17 +85,36 @@ public class BankincCardController {
 			noTarjeta = generada.getIdTarjeta();
 			
 		}catch(NumberFormatException e) {
-			throw new GestionTarjetaException("Los párametros cardId(entero 10), o clienteId(entero) no tienen el formato adecuado: ", e);
+			throw new GestionTarjetaException("Los párametros cardId(entero 16), o clienteId(entero) no tienen el formato adecuado: ", e);
 		}
 		
 		Tarjeta aGenerar = tarjetaService.activarTarjeta(generada.getNumeroTarjeta(), noCliente);
 		return aGenerar;	
 	}
 	
+	
+	
+	
 	@DeleteMapping (path ="/{cardId}")
-	public Response bloquearTarjeta(@RequestParam("id") String id)
+	public Tarjeta bloquearTarjeta(@PathVariable String cardId)
 	{
-		return null;
+		Tarjeta aBloquear = null;
+		String numeroTarjeta;
+		Long longTarjeta = null;    
+		try {
+		longTarjeta= Long.getLong(cardId);	
+		aBloquear = tarjetaService.encontrarPorNumeroTarjeta(cardId);
+		if(aBloquear==null) {
+			throw new GestionTarjetaException2("El número de tarjeta ingresada no existe");
+		}
+		
+		} catch(NumberFormatException e) {
+			throw new GestionTarjetaException("El párametro cardId(entero 16) no tiene el formato adecuado: ", e);
+		} 
+		
+		aBloquear = tarjetaService.eliminar(cardId);
+		
+		return aBloquear;
 	}
 	
 	@PostMapping("/card/balance")
